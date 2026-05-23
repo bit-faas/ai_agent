@@ -134,7 +134,7 @@ def test_handler():
 
 ---
 
-Notes:
+**## Notes:**
 
 A default test is included
 
