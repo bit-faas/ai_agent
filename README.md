@@ -124,7 +124,7 @@ This supports:
 
 ## 🧪 Testing Strategy
 
-- Test file location: `src/function/handler_test.py`  
+- **Test file location:** `src/function/handler_test.py`  
 
 **Standard test function:**
 ```python
