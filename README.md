@@ -129,54 +129,12 @@ This supports:
 **Standard test function:**
 ```python
 def test_handler():
+    # Example test case
+    assert True
 Notes:
 
-Default test is included
+A default test is included
 
-Developers should extend test cases
+Developers should extend test cases to cover new functionality
 
-Tests run automatically during CI
-
-🔗 CI/CD Integration
-Integrated with Jenkins pipelines:
-
-Test Pipeline
-
-Trigger: PR to main
-
-Purpose: validation
-
-Production Pipeline
-
-Trigger: main branch update
-
-Purpose: build and publish
-
-⚠️ Guidelines
-Do not modify folder structure
-
-Do not commit sandbox artifacts
-
-Ensure handler matches template instructions
-
-Always maintain/update handler_test.py
-
-🚀 Future Enhancements
-Multi‑agent collaboration
-
-Version‑based deployments
-
-Centralized dependency management
-
-Automated GitHub comment resolution
-
-📝 Notes
-This template is designed to:
-
-Standardize AI agent development
-
-Reduce manual setup effort
-
-Enable scalable sandboxed execution
-
-Integrate seamlessly with GitHub workflows
+Tests run automatically during CI pipelines
