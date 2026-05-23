@@ -2,6 +2,7 @@ import json
 import uuid
 from github import Github
 from typing import Dict, Any
+from gpt4all import GPT4All
 
 # In-memory mapping of request_id -> sandbox/session
 SANDBOX_MAP: Dict[str, Dict[str, Any]] = {}
@@ -55,8 +56,9 @@ def execute_task(sandbox: Dict[str, Any], task: str) -> str:
     return f"Agent executed task: {task} in {sandbox['repo']} → {agent_response}"
 
 
-# Example GPT agent wrapper (replace with actual API call)
 def chat_gpt_agent(task: str, sandbox: Dict[str, Any]) -> str:
-    # Here you’d call OpenAI API or any free LLM
-    # For demo, we simulate agent reasoning
-    return f"Generated code for task '{task}' with tools {sandbox['tools']}"
+    model = GPT4All("mistral-7b-instruct")
+    with model.chat_session() as session:
+        response = session.prompt(f"Task: {task}\nTools: {sandbox['tools']}")
+    return response
+
