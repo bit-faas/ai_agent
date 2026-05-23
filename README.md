@@ -1,19 +1,20 @@
-# 📦 FaaS Template Repository
+# 🤖 AI Agent Template Repository
 
 ## 📌 Overview
 
-This repository provides a standardized template for building and deploying FaaS modules using OpenFaaS with automated CI/CD support.
+This repository provides a standardized template for building and deploying **developer AI agents** with automated sandbox provisioning, GitHub integration, and iterative development support.
 
-It ensures consistent structure, automated validation, and seamless deployment across environments.
+It ensures isolated environments per request, automated repo setup, and seamless collaboration between developers and AI agents.
 
 ---
 
 ## 🎯 Objective
 
-- Ensure all FaaS modules follow a consistent structure  
-- Enable automatic testing before merge  
-- Support deployment across client machines  
-- Simplify scalability and management  
+- Provide isolated sandbox shells per developer request  
+- Automate GitHub repo creation and branch management  
+- Enable AI agents to interpret tasks and generate code  
+- Support iterative bug fixing via GitHub comments  
+- Simplify deployment and CI/CD integration  
 
 ---
 
@@ -21,54 +22,60 @@ It ensures consistent structure, automated validation, and seamless deployment a
 
 This template follows a standardized structure:
 
-```
 faas-template/
 │
-├── build.gradle        → Gradle tasks (build-faas, push-faas, deploy-faas)
-├── function.yml        → OpenFaaS configuration
+├── build.gradle        → Gradle tasks (build-agent, push-agent, deploy-agent)
+├── function.yml        → Agent configuration (sandbox, GitHub, tools)
 ├── deps.gradle         → External dependencies
 │
 ├── src/                → Source code (developer working directory)
-│   ├── handler.py
-│   ├── handler_test.py
+│   ├── function/
+│   │   ├── handler.py        → Core agent handler (init_sandbox, execute_task, chat_gpt_agent)
+│   │   ├── requirements.txt  → Python dependencies (PyGithub, GPT agent bindings)
+│   │   ├── handler_test.py   → Unit tests
 │
-├── app/                → Client application using this FaaS module
+├── app/                → Client application using this AI agent
 │
 └── README.md
-```
+
+Code
 
 **Notes:**
-- `src/` contains core function logic  
-- `app/` contains client applications invoking the FaaS  
-- `deps.gradle` manages external dependencies  
+- `src/function/handler.py` contains the agent logic  
+- `src/function/requirements.txt` manages dependencies  
+- `app/` contains client applications invoking the agent  
 
 ---
 
-## 🛠️ Build Behavior
+## 🛠️ Sandbox Behavior
 
-- A `build/` folder is created during runtime  
-- This folder is temporary and used only for build execution  
-- It must not be committed to the repository  
+- A **sandbox** is created per request ID  
+- Tools listed in the template are installed automatically  
+- GitHub repo/branch is provisioned via API  
+- Sandbox metadata is mapped to the request ID for future calls  
 
 **.gitignore requirement:**
-```
 build/
-```
+sandbox/
+
+Code
 
 ---
 
 ## 🔄 Development Flow (CI – Test Server)
 
-1. Developer pushes to `dev` / feature branch  
-2. Pull Request created → `main`  
-3. Jenkins Test Server is triggered  
-4. Build and test execution  
-5. On success → reviewer approval  
-6. Merge to `main`  
+1. Developer submits requirement via agent function  
+2. AI agent interprets task → generates code  
+3. Code pushed to GitHub repo/branch  
+4. Pull Request created → `main`  
+5. Jenkins Test Server triggered  
+6. Build and test execution  
+7. Reviewer comments processed by agent  
+8. Iteration until approval  
 
 **CI Responsibilities:**
-- Build FaaS module  
-- Execute unit tests (`handler_test.py`)  
+- Execute agent tasks  
+- Run unit tests (`handler_test.py`)  
 - Validate functionality before merge  
 
 ---
@@ -81,16 +88,17 @@ build/
 4. Test verification  
 5. Docker image creation  
 6. Push image to registry  
+7. Deployment executed per template instructions  
 
 ---
 
 ## 📦 Deployment Model
 
-- Docker images are published to a central registry  
+- Docker images published to a central registry  
 - Client systems can:
   - Pull the image  
   - Import into container runtime  
-  - Deploy using OpenFaaS  
+  - Deploy using sandbox instructions  
 
 ---
 
@@ -99,71 +107,76 @@ build/
 Any client machine with:
 
 - Docker  
-- OpenFaaS (faasd)  
+- Python runtime  
+- GitHub access token  
 
 Can:
 
-- Pull → Deploy → Invoke function  
+- Initialize sandbox → Submit tasks → Iterate with agent  
 
 This supports:
 
 - Remote execution  
-- Multi-device usage (server, desktop, mobile)  
+- Multi‑developer usage  
+- Automated bug fixing and deployment  
 
 ---
 
 ## 🧪 Testing Strategy
 
-- Test file location: `src/handler_test.py`  
+- Test file location: `src/function/handler_test.py`  
 
 **Standard test function:**
 ```python
-def test_handle():
-```
+def test_handler():
+Notes:
 
-**Notes:**
-- Default test is included  
-- Developers should extend test cases  
-- Tests run automatically during CI  
+Default test is included
 
----
+Developers should extend test cases
 
-## 🔗 CI/CD Integration
+Tests run automatically during CI
 
+🔗 CI/CD Integration
 Integrated with Jenkins pipelines:
 
-**Test Pipeline**
-- Trigger: PR to main  
-- Purpose: validation  
+Test Pipeline
 
-**Production Pipeline**
-- Trigger: main branch update  
-- Purpose: build and publish  
+Trigger: PR to main
 
----
+Purpose: validation
 
-## ⚠️ Guidelines
+Production Pipeline
 
-- Do not modify folder structure  
-- Do not commit build artifacts  
-- Ensure handler matches `function.yml`  
-- Always maintain/update `handler_test.py`  
+Trigger: main branch update
 
----
+Purpose: build and publish
 
-## 🚀 Future Enhancements
+⚠️ Guidelines
+Do not modify folder structure
 
-- Version-based deployments  
-- Multi-function support  
-- Centralized dependency management  
-- Automated client updates  
+Do not commit sandbox artifacts
 
----
+Ensure handler matches template instructions
 
-## 📝 Notes
+Always maintain/update handler_test.py
 
+🚀 Future Enhancements
+Multi‑agent collaboration
+
+Version‑based deployments
+
+Centralized dependency management
+
+Automated GitHub comment resolution
+
+📝 Notes
 This template is designed to:
 
-- Standardize FaaS development  
-- Reduce manual deployment effort  
-- Enable scalable distributed execution  
+Standardize AI agent development
+
+Reduce manual setup effort
+
+Enable scalable sandboxed execution
+
+Integrate seamlessly with GitHub workflows
