@@ -131,6 +131,9 @@ This supports:
 def test_handler():
     # Example test case
     assert True
+
+---
+
 Notes:
 
 A default test is included
