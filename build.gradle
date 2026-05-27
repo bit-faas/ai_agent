@@ -6,7 +6,7 @@ ext {
     gatewayUrl = "http://127.0.0.1:8080"
     templateName = "python3-flask-debian"
     templateRepo = "https://github.com/bit-template/python-flask-template.git"
-    templateBranch = "master"
+    templateBranch = "dev"
 }
 
 def faas_yml = "stack.yml"
