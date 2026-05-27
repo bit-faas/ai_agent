@@ -71,7 +71,7 @@ Repository: ${env.REPO}
 Organization: ${env.ORG}
 Build URL: ${env.BUILD_URL}
 """,
-                to: "bitresearch2006@gmail.com, mahasree.hitech@gmail.com, anandg.embedd@gmail.com"
+                to: "bitresearch2006@gmail.com, mahasree.hitech@gmail.com, anandg.embedd@gmail.com" #SMTP config
             )
         }
     }
